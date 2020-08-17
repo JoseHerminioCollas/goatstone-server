@@ -9,7 +9,7 @@ describe('insert', () => {
     connection = await MongoClient.connect(url, {
       useNewUrlParser: true,
     });
-    db = await connection.db('test');
+    db = await connection.db('goatstone');
   });
 
   afterAll(async () => {
@@ -20,7 +20,7 @@ describe('insert', () => {
   it('should insert a doc into collection', async () => {
     const messages = db.collection('messages');
     const id = new Date().getTime()
-    const mockMessage = {_id: id, name: 'Xohn'};
+    const mockMessage = {_id: id, name: `XXXohn${new Date()}`};
 
     await messages.insertOne(mockMessage);
     const insertedUser = await messages.findOne({_id: id});
