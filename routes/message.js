@@ -29,6 +29,16 @@ router.post('/', async function(req, res, next) {
     message: req.body.message || ''
   }
   addMessageDoc(messageDoc)
+  // x
+  // x\
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  // res.setHeader('Access-Control-Allow-Origin', '*');
+  // res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+  // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');  
   res.send('message sent');
 });
 
