@@ -1,45 +1,35 @@
-const {MongoClient} = require('mongodb');
-var express = require('express');
+const {MongoClient} = require('mongodb')
+const express = require('express')
 
-var router = express.Router();
+const router = express.Router()
 
 async function addMessageDoc(messageDoc){
   const url = 'mongodb://localhost:27017'
   connection = await MongoClient.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  });
-  db = await connection.db('goatstone');
-
+  })
+  const db = await connection.db('goatstone')
   await db
     .collection('messages')
-    .insertOne(messageDoc);
+    .insertOne(messageDoc)
   await connection
-    .close();
+    .close()
 }
 
 router.get('/', function(req, res, next) {
   const a = req.query
-  res.send('message');
+  res.send('messagesss')
 });
 router.post('/', async function(req, res, next) {
-  const messageDoc = {
-    email: req.body.email || '',
-    name: req.body.name || '',
-    message: req.body.message || ''
+   console.log('post message: ', req.query)
+   const messageDoc = {
+    email: req.query.email || '',
+    name: req.query.name || '',
+    message: req.query.message || ''
   }
   addMessageDoc(messageDoc)
-  // x
-  // x\
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  // res.setHeader('Access-Control-Allow-Origin', '*');
-  // res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
-  // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');  
-  res.send('message sent');
-});
+  res.send('message sent')
+})
 
-module.exports = router;
+module.exports = router
