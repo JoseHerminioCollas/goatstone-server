@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
    );
    next();
  });
-// app.use('/', indexRouter); /
+app.use('/', indexRouter);
 app.use('/message', messageRouter);
 
 // catch 404 and forward to error handler
